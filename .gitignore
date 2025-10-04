@@ -1,0 +1,14 @@
+# Go
+bin/
+dist/
+*.exe
+*.log
+*.out
+*.test
+
+# IDE
+.vscode/
+.idea/
+
+# Docker
+**/.env

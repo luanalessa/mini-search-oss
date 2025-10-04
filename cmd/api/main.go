@@ -22,7 +22,7 @@ func main() {
 	zerolog.TimeFieldFormat = time.RFC3339Nano
 	log.Logger = log.Output(zerolog.NewConsoleWriter())
 
-	addr := getEnv("HTTP_ADDR", ":8080	")
+	addr := getEnv("HTTP_ADDR", ":8080")
 
 	r := chi.NewRouter()
 	r.Use(middleware.RequestID)

@@ -12,19 +12,20 @@ func TextHandler(t *testing.T) {
 
 	HealthHandler(rr, req)
 
-	if rr.Code != http.StatusOK {
-		t.Fatalf("expected status 200, got %d", rr.Code)
+	assert := func(cond bool, msg string, args ...interface{}) {
+		if !cond {
+			t.Fatalf(msg, args...)
+		}
 	}
+
+	assert(rr.Code == http.StatusOK, "expected status 200, got %d", rr.Code)
 
 	ct := rr.Header().Get("Content-Type")
-	if ct != "application/json" {
-		t.Fatalf("expected application/json, got %s", ct)
-	}
+	assert(ct == "application/json", "expected application/json, got %s", ct)
 
 	body := rr.Body.String()
-	if want := `"status":"ok"`; !contains(body, want) {
-		t.Fatalf("expected body to contain %s, got %s", want, body)
-	}
+	want := `"status":"ok"`
+	assert(contains(body, want), "expected body to contain %s, got %s", want, body)
 
 }
 
